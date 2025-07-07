@@ -1,9 +1,13 @@
 "use client";
 
+import { api } from '@/convex/_generated/api';
+import { useQuery } from 'convex/react';
 import React from 'react'
 
 const ContactPage = () => {
-  return (
+ const data = useQuery(api.contacts.getAllContacts);
+ console.log(data);
+    return (
     <div>
       ContactPage
     </div>
