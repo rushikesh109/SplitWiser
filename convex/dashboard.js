@@ -19,7 +19,8 @@ export const getUserBalances = query({
 
         for (const e of expenses) {
             const isPayer = e.paidByUserId === user._id;
-            const mySplit = e.splits.find((s) => s.user._id);
+            const mySplit = e.splits.find((s) => s.userId === user._id);
+
 
             if (isPayer) {
                 for (const s of e.splits) {
