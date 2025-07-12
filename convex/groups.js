@@ -2,79 +2,7 @@ import { query } from "./_generated/server";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
 
-export const getGroupOrMembers = query({
-  args: {
-    groupId: v.optional(v.id("groups")), // Optional - if provided, will return details for just this group
-  },
-  handler: async (ctx, args) => {
-    // Use centralized getCurrentUser function
-    const currentUser = await ctx.runQuery(internal.users.getCurrentUser);
 
-    // Get all groups where the user is a member
-    const allGroups = await ctx.db.query("groups").collect();
-    const userGroups = allGroups.filter((group) =>
-      group.members.some((member) => member.userId === currentUser._id)
-    );
-
-    // If a specific group ID is provided, only return details for that group
-    if (args.groupId) {
-      const selectedGroup = userGroups.find(
-        (group) => group._id === args.groupId
-      );
-
-      if (!selectedGroup) {
-        throw new Error("Group not found or you're not a member");
-      }
-
-      // Get all user details for this group's members
-      const memberDetails = await Promise.all(
-        selectedGroup.members.map(async (member) => {
-          const user = await ctx.db.get(member.userId);
-          if (!user) return null;
-
-          return {
-            id: user._id,
-            name: user.name,
-            email: user.email,
-            imageUrl: user.imageUrl,
-            role: member.role,
-          };
-        })
-      );
-
-      // Filter out any null values (in case a user was deleted)
-      const validMembers = memberDetails.filter((member) => member !== null);
-
-      // Return selected group with member details
-      return {
-        selectedGroup: {
-          id: selectedGroup._id,
-          name: selectedGroup.name,
-          description: selectedGroup.description,
-          createdBy: selectedGroup.createdBy,
-          members: validMembers,
-        },
-        groups: userGroups.map((group) => ({
-          id: group._id,
-          name: group.name,
-          description: group.description,
-          memberCount: group.members.length,
-        })),
-      };
-    } else {
-      // Just return the list of groups without member details
-      return {
-        selectedGroup: null,
-        groups: userGroups.map((group) => ({
-          id: group._id,
-          name: group.name,
-          description: group.description,
-          memberCount: group.members.length,
-        })),
-      };
-    }
-  },
-});
 
 // Get expenses for a specific group
 export const getGroupExpenses = query({
@@ -204,5 +132,79 @@ export const getGroupExpenses = query({
       balances,
       userLookupMap,
     };
+  },
+});
+
+export const getGroupOrMembers = query({
+  args: {
+    groupId: v.optional(v.id("groups")), // Optional - if provided, will return details for just this group
+  },
+  handler: async (ctx, args) => {
+    // Use centralized getCurrentUser function
+    const currentUser = await ctx.runQuery(internal.users.getCurrentUser);
+
+    // Get all groups where the user is a member
+    const allGroups = await ctx.db.query("groups").collect();
+    const userGroups = allGroups.filter((group) =>
+      group.members.some((member) => member.userId === currentUser._id)
+    );
+
+    // If a specific group ID is provided, only return details for that group
+    if (args.groupId) {
+      const selectedGroup = userGroups.find(
+        (group) => group._id === args.groupId
+      );
+
+      if (!selectedGroup) {
+        throw new Error("Group not found or you're not a member");
+      }
+
+      // Get all user details for this group's members
+      const memberDetails = await Promise.all(
+        selectedGroup.members.map(async (member) => {
+          const user = await ctx.db.get(member.userId);
+          if (!user) return null;
+
+          return {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            imageUrl: user.imageUrl,
+            role: member.role,
+          };
+        })
+      );
+
+      // Filter out any null values (in case a user was deleted)
+      const validMembers = memberDetails.filter((member) => member !== null);
+
+      // Return selected group with member details
+      return {
+        selectedGroup: {
+          id: selectedGroup._id,
+          name: selectedGroup.name,
+          description: selectedGroup.description,
+          createdBy: selectedGroup.createdBy,
+          members: validMembers,
+        },
+        groups: userGroups.map((group) => ({
+          id: group._id,
+          name: group.name,
+          description: group.description,
+          memberCount: group.members.length,
+        })),
+      };
+    } else {
+      // Just return the list of groups without member details
+      return {
+        selectedGroup: null,
+        groups: userGroups.map((group) => ({
+          id: group._id,
+          name: group.name,
+          description: group.description,
+          memberCount: group.members.length,
+        })),
+      };
+    }
   },
 });
