@@ -143,6 +143,21 @@ export const getGroupExpenses = query({
       ledger[s.paidByUserId][s.receivedByUserId] -= s.amount; // they paid back
     }
 
+
+    // Simplify the Ledger (Debt Simplification)
+    // ----------
+    // Example with a circular debt
+    // -Initial ledger
+    //   -user1 owes user2 $10
+    //   -user2 owes user3 $15
+    //   -user3 owes user1 $5
+    // -AFTER simplification:
+    //   -user1 owes user2 $5
+    //   -user2 owes user3 $15
+    //   -user3 owes user1 $0
+
+  // this reduces the circular debt pattern
+
     /* ----------  net the pair‑wise ledger ---------- */
     ids.forEach((a) => {
       ids.forEach((b) => {
