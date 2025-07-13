@@ -154,11 +154,11 @@ export const getExpensesBetweenUsers = query({
 
 export const deleteExpense = mutation({
   args: {
-    expensesId: v.id("expenses"),
+    expenseId: v.id("expenses"),
   },
   handler: async (ctx, args) => {
     const user = await ctx.runQuery(internal.users.getCurrentUser);
-    const expense = await ctx.db.get(args.expensesId);
+    const expense = await ctx.db.get(args.expenseId);
     if (!expense) throw new Error("Expense not found");
 
     if (
@@ -168,7 +168,7 @@ export const deleteExpense = mutation({
       throw new Error("You don't have permission to delete this expense");
     }
 
-    await ctx.db.delete(args.expensesId);
+    await ctx.db.delete(args.expenseId);
     return { success: true };
   },
 });
