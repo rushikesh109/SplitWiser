@@ -1,3 +1,5 @@
+import ChatBot from "@/components/chatbot";
+import ThemeToggle from "@/components/ThemeToggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -42,7 +44,7 @@ export default function Home() {
     <div className="container mx-auto max-w-5xl overflow-hidden rounded-xl shadow-xl">
       <div className="gradient p-1 aspect-[16/9]">
         <Image 
-        src="/hero.png"
+        src="/hero.jpg"
         width={1280}
         height={720}
         alt="Banner"
@@ -82,7 +84,7 @@ export default function Home() {
     </div>
   </section>
 
-    <section id="features" className="bg-gray-50 py-20">
+    <section id="features" className="bg-gray-50 dark:bg-zinc-900 py-20">
     <div className="container mx-auto px-4 md:px-6 text-center">
       <Badge variant="outline" className="bg-green-100 text-green-700">
         How it Works
@@ -110,7 +112,7 @@ export default function Home() {
     </div>
   </section>
 
-  <section className="bg-gray-50 py-20">
+  <section className="bg-gray-50 dark:bg-zinc-900 py-20">
     <div className="container mx-auto px-4 md:px-6 text-center">
       <Badge variant="outline" className="bg-green-100 text-green-700">
         Testimonials
@@ -160,10 +162,11 @@ export default function Home() {
         <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
        </Button>
+       
     </div>
   
   </section>
-  
+  <ChatBot/>
 </div>
   );
 }

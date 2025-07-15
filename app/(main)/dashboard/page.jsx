@@ -12,8 +12,8 @@ import { BalanceSummary } from "./components/balance-summary";
 import { ExpenseSummary } from "./components/expense-summary";
 import { GroupList } from "./components/group-list";
 
-/** Small reusable card */
-const StatCard = ({ title, amount, color = "text-black", note }) => (
+
+const StatCard = ({ title, amount, color = "text-foreground", note }) => (
   <Card>
     <CardHeader className="pb-2">
       <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
@@ -71,7 +71,7 @@ const DashboardPage = () => {
               ? "text-green-600"
               : balances?.totalBalance < 0
               ? "text-red-600"
-              : "text-black"
+              : "text-foreground" 
           }
           note={
             balances?.totalBalance > 0
@@ -96,7 +96,7 @@ const DashboardPage = () => {
               ? `$${balances.youOwe.toFixed(2)}`
               : "$0.00"
           }
-          color={(balances?.oweDetails?.youOwe?.length ?? 0) > 0 ? "text-red-600" : "text-black"}
+          color={(balances?.oweDetails?.youOwe?.length ?? 0) > 0 ? "text-red-600" : "text-foreground"} 
           note={
             (balances?.oweDetails?.youOwe?.length ?? 0) > 0
               ? `To ${balances.oweDetails.youOwe.length} people`
@@ -106,14 +106,11 @@ const DashboardPage = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left column: Expense summary */}
         <div className="lg:col-span-2 space-y-6">
           <ExpenseSummary monthlySpending={monthlySpending} totalSpent={totalSpent} />
         </div>
 
-        {/* Right column */}
         <div className="space-y-6">
-          {/* Balance Details Card */}
           <Card>
             <CardHeader className="pb-3 flex items-center justify-between">
               <CardTitle>Balance Details</CardTitle>
@@ -129,7 +126,6 @@ const DashboardPage = () => {
             </CardContent>
           </Card>
 
-          {/* Groups Card */}
           <Card>
             <CardHeader className="pb-3 flex items-center justify-between">
               <CardTitle>Your Groups</CardTitle>
