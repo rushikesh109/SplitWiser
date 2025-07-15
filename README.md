@@ -233,7 +233,30 @@ npx convex deploy
 
 ---
 
-## 🖼️ Screenshots
+### 🖼️ Screenshots
+
+### 🏠 Home Page
+
+<img src="https://raw.githubusercontent.com/rushikesh109/SplitWiser/main/public/screenshots/home.png" alt="Home Page" width="700" />
+
+---
+
+### 📊 Dashboard View
+
+<img src="https://raw.githubusercontent.com/rushikesh109/SplitWiser/main/public/screenshots/dashboard.png" alt="Dashboard View" width="700" />
+
+---
+
+### ➕ Add Expense
+
+<img src="https://raw.githubusercontent.com/rushikesh109/SplitWiser/main/public/screenshots/expenses.png" alt="Add Expense" width="700" />
+
+---
+
+### 🔁 Settle Up
+
+<img src="https://raw.githubusercontent.com/rushikesh109/SplitWiser/main/public/screenshots/settleup.png" alt="Settle Up" width="700" />
+
 
 ### 🏠 Home Page
 
@@ -299,7 +322,7 @@ Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
 ## 📝 License
 
-> **Note:** This project does not currently specify a license. To make it open source, please add a LICENSE file (e.g., MIT, Apache 2.0, etc.).
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
