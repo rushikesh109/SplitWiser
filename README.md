@@ -258,28 +258,6 @@ npx convex deploy
 <img src="https://raw.githubusercontent.com/rushikesh109/SplitWiser/main/public/screenshots/settleup.png" alt="Settle Up" width="700" />
 
 
-### 🏠 Home Page
-
-<img src="/screenshots/home.png" alt="Home Page" width="700" />
-
----
-
-### 📊 Dashboard View
-
-<img src="/screenshots/dashboard.png" alt="Dashboard View" width="700" />
-
----
-
-### ➕ Add Expense
-
-<img src="/screenshots/expenses.png" alt="Add Expense" width="700" />
-
----
-
-### 🔁 Settle Up
-
-<img src="/screenshots/settleup.png" alt="Settle Up" width="700" />
-
 ---
 
 ## 🔐 Security Features
