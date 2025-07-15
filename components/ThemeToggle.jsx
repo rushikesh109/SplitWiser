@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -48,6 +49,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={cycleTheme}
+      data-testid="theme-toggle"
       aria-label="Toggle Theme"
       className="flex items-center gap-2 px-4 h-10 rounded-md text-sm font-medium border transition-all
                  bg-gray-100 text-black border-gray-300 hover:bg-gray-200
